@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <sys/socket.h>
 #include <sys/types.h>
-
+#include <stdlib.h>
 #include <linux/if_packet.h>
 #include <netinet/in.h>
 #include <netinet/if_ether.h> // for ethernet header
@@ -15,6 +15,52 @@
 #include <arpa/inet.h>
 
 FILE* logs;
+void PrintData (const char * data , int Size)
+{
+	int i , j;
+	for(i=0 ; i < Size ; i++)
+	{
+		if( i!=0 && i%16==0)   //if one line of hex printing is complete...
+		{
+			fprintf(logs , "         ");
+			for(j=i-16 ; j<i ; j++)
+			{
+				if(data[j]>=32 && data[j]<=128)
+					fprintf(logs , "%c",(unsigned char)data[j]); //if its a number or alphabet
+				
+				else fprintf(logs , "."); //otherwise print a dot
+			}
+			fprintf(logs , "\n");
+		} 
+		
+		if(i%16==0) fprintf(logs , "   ");
+			fprintf(logs , " %02X",(unsigned int)data[i]);
+				
+		if( i==Size-1)  //print the last spaces
+		{
+			for(j=0;j<15-i%16;j++) 
+			{
+			  fprintf(logs , "   "); //extra spaces
+			}
+			
+			fprintf(logs , "         ");
+			
+			for(j=i-i%16 ; j<=i ; j++)
+			{
+				if(data[j]>=32 && data[j]<=128) 
+				{
+				  fprintf(logs, "%c",(unsigned char)data[j]);
+				}
+				else 
+				{
+				  fprintf(logs , ".");
+				}
+			}
+			
+			fprintf(logs ,  "\n" );
+		}
+	}
+}
 int main()
 {
     logs=fopen("logs.txt","w");
@@ -23,7 +69,7 @@ int main()
     sock_r = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
     if (sock_r < 0)
     {
-        printf("error in socket");
+        printf("error in socket\n");
         return 0;
     }
     while(1){
@@ -41,10 +87,10 @@ int main()
     }
 
     struct ethhdr *eth = (struct ethhdr *)(buffer);
-    // printf("\nEthernet Header\n");
-    // printf("\t | -Source Address : %d - % d - % d - % d - % d - % d\n", eth->h_source[0], eth->h_source[1], eth->h_source[2], eth->h_source[3], eth->h_source[4], eth->h_source[5]);
-    // printf("\t | -Destination Address : % d - % d - % d - % d - % d - % d\n", eth->h_dest[0], eth->h_dest[1], eth->h_dest[2], eth->h_dest[3], eth->h_dest[4], eth->h_dest[5]);
-    // printf("\t | -Protocol : % d\n\n", eth->h_proto);
+    fprintf(logs,"\nEthernet Header\n");
+    fprintf(logs,"\t | -Source Address : %d - % d - % d - % d - % d - % d\n", eth->h_source[0], eth->h_source[1], eth->h_source[2], eth->h_source[3], eth->h_source[4], eth->h_source[5]);
+    fprintf(logs,"\t | -Destination Address : % d - % d - % d - % d - % d - % d\n", eth->h_dest[0], eth->h_dest[1], eth->h_dest[2], eth->h_dest[3], eth->h_dest[4], eth->h_dest[5]);
+    fprintf(logs,"\t | -Protocol : % d\n\n", eth->h_proto);
     struct sockaddr_in source, dest;
     unsigned short iphdrlen;
     struct iphdr *ip = (struct iphdr *)(buffer + sizeof(struct ethhdr));
@@ -68,6 +114,7 @@ int main()
 	fprintf(logs,"\t|-Destination IP    : %s\n",inet_ntoa(dest.sin_addr));
 
     struct tcphdr *tcp=(struct tcphdr*)(buffer + iphdrlen + sizeof(struct ethhdr));
+    int header_size =  sizeof(struct ethhdr) + iphdrlen + tcp->doff*4;
     fprintf(logs,"\nTCP Header\n");
     fprintf(logs,"\t|-Source Port : %u\n" , ntohs(tcp->source));
     fprintf(logs,"\t|-Destination Port : %u\n" , ntohs(tcp->dest));
@@ -77,7 +124,17 @@ int main()
     fprintf(logs,"\t|-TCP Window: %d\n", ntohs(tcp->window));
     fprintf(logs,"\t|-TCP Urgent Pointer: %d\n", ntohs(tcp->urg_ptr));
 
-
+	
+	fprintf(logs , "IP Header\n");
+	PrintData(buffer,iphdrlen);
+		
+	fprintf(logs , "TCP Header\n");
+	PrintData(buffer+iphdrlen,tcp->doff*4);
+		
+	fprintf(logs , "Data Payload\n");	
+	PrintData(buffer + header_size , buflen - header_size );
+						
+	fprintf(logs , "\n###########################################################");
     }
     return 0;
 }
