@@ -1,0 +1,99 @@
+
+THE 4 TUPLE
+	|-Source IP         : 127.0.0.1
+	|-Destination IP    : 127.0.0.1
+	|-Source Port : 42636
+	|-Destination Port : 9614
+
+###########################################################
+THE 4 TUPLE
+	|-Source IP         : 127.0.0.1
+	|-Destination IP    : 127.0.0.1
+	|-Source Port : 42636
+	|-Destination Port : 9614
+
+###########################################################
+THE 4 TUPLE
+	|-Source IP         : 127.0.0.1
+	|-Destination IP    : 127.0.0.1
+	|-Source Port : 9614
+	|-Destination Port : 42636
+
+###########################################################
+THE 4 TUPLE
+	|-Source IP         : 127.0.0.1
+	|-Destination IP    : 127.0.0.1
+	|-Source Port : 9614
+	|-Destination Port : 42636
+
+###########################################################
+THE 4 TUPLE
+	|-Source IP         : 127.0.0.1
+	|-Destination IP    : 127.0.0.1
+	|-Source Port : 42636
+	|-Destination Port : 9614
+
+###########################################################
+THE 4 TUPLE
+	|-Source IP         : 127.0.0.1
+	|-Destination IP    : 127.0.0.1
+	|-Source Port : 42636
+	|-Destination Port : 9614
+
+###########################################################
+THE 4 TUPLE
+	|-Source IP         : 127.0.0.1
+	|-Destination IP    : 127.0.0.1
+	|-Source Port : 9614
+	|-Destination Port : 42636
+
+###########################################################
+THE 4 TUPLE
+	|-Source IP         : 127.0.0.1
+	|-Destination IP    : 127.0.0.1
+	|-Source Port : 9614
+	|-Destination Port : 42636
+
+###########################################################
+THE 4 TUPLE
+	|-Source IP         : 127.0.0.1
+	|-Destination IP    : 127.0.0.1
+	|-Source Port : 42636
+	|-Destination Port : 9614
+
+###########################################################
+THE 4 TUPLE
+	|-Source IP         : 127.0.0.1
+	|-Destination IP    : 127.0.0.1
+	|-Source Port : 42636
+	|-Destination Port : 9614
+
+###########################################################
+THE 4 TUPLE
+	|-Source IP         : 10.7.46.175
+	|-Destination IP    : 20.189.173.6
+	|-Source Port : 52966
+	|-Destination Port : 443
+
+###########################################################
+THE 4 TUPLE
+	|-Source IP         : 10.7.46.175
+	|-Destination IP    : 20.189.173.6
+	|-Source Port : 52966
+	|-Destination Port : 443
+
+###########################################################
+THE 4 TUPLE
+	|-Source IP         : 10.7.46.175
+	|-Destination IP    : 20.189.173.6
+	|-Source Port : 52966
+	|-Destination Port : 443
+
+###########################################################
+THE 4 TUPLE
+	|-Source IP         : 20.189.173.6
+	|-Destination IP    : 10.7.46.175
+	|-Source Port : 443
+	|-Destination Port : 52966
+
+###########################################################
