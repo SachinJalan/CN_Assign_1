@@ -69,12 +69,12 @@ void PrintData(const unsigned char *data, int Size)
 }
 void print_pid(int port_id)
 {
-    int port = port_id; // Replace with your desired port number
-    // Construct the command dynamically with the port variable
-    char command[128]; // Adjust the buffer size as needed
+    int port = port_id; 
+
+    char command[128]; 
     snprintf(command, sizeof(command), "ss -nap | grep ':%d ' | grep -oP 'pid=\\K\\d+'", port);
 
-    // Open a pipe to the command
+
     FILE *fp = popen(command, "r");
     if (fp == NULL)
     {
@@ -82,10 +82,10 @@ void print_pid(int port_id)
         return;
     }
 
-    char output[128]; // Adjust the buffer size as needed
+    char output[128]; 
     if (fgets(output, sizeof(output), fp) != NULL)
     {
-        // Remove the trailing newline character, if present
+    
         size_t len = strlen(output);
         if (len > 0 && output[len - 1] == '\n')
         {
@@ -117,7 +117,7 @@ int main()
     pid_data = fopen("pid_data.txt", "w");
     time_t endwait;
     time_t start = time(NULL);
-    time_t seconds = 30; // end loop after this time has elapsed
+    time_t seconds = 30; // end loop after this time 
 
     endwait = start + seconds;
     int sock_r;

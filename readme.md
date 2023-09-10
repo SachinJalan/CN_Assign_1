@@ -64,4 +64,6 @@ The Assignment can be found under the file name Assignment-1 in the repository.
     ```bash
     sudo ss -nap
     ```
-    
+#### Team Members
+[Sachin Jalan](jalansachin@iitgn.ac.in) - 21110183  
+[Anushk Bhana](bhanaanushk@iitgn.ac.in) - 21110031

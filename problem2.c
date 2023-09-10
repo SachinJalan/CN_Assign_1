@@ -68,7 +68,7 @@ int main()
     logs = fopen("logsq2.txt", "w");
     time_t endwait;
     time_t start = time(NULL);
-    time_t seconds = 5000; // end loop after this time has elapsed
+    time_t seconds = 5000; 
 
     endwait = start + seconds;
     int sock_r;
